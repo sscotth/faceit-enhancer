@@ -64,7 +64,7 @@ function observeMainContent(element) {
             element
           )
         }
-      }
+      })
       runFeatureIf(
         'matchRoomAutoVetoLocations',
         clickMatchRoomVetoLocations,
