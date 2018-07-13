@@ -90,10 +90,7 @@ export default async parentElement => {
   )
 
   goToServerElement.parentElement.append(
-    <div>{connectToServerDelayedElement}</div>
+    <div id="connectToServerDelayedElement">{connectToServerDelayedElement}</div>
   )
 
-  if (matchRoomAutoConnectToServerDelayed) {
-    setTimeout(() => connectToServerDelayedElement.click(), 5000)
-  }
 }
