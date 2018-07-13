@@ -30,6 +30,7 @@ export const DEFAULTS = {
   matchRoomShowPlayerStats: false,
   matchRoomAutoCopyServerData: false,
   matchRoomAutoConnectToServer: false,
+  matchRoomAutoConnectToServerDelayed: false,
   matchRoomHidePlayerControls: true,
   matchRoomAutoVetoLocations: false,
   matchRoomAutoVetoLocationItems: MATCH_ROOM_VETO_LOCATION_ITEMS,

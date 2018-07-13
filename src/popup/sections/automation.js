@@ -29,6 +29,15 @@ export default ({ getSwitchProps }) => (
       secondary="Connect to the server automatically. NOTE: It's recommended to have the game started manually beforehand to avoid lags/FPS issues."
       {...getSwitchProps('matchRoomAutoConnectToServer')}
     />
+    {
+      getSwitchProps('matchRoomAutoConnectToServer').checked
+        ? <ListItemSwitch
+          primary="Connect to Server with one minute remaining"
+          secondary="Connect to the server automatically with one minute remaining."
+          {...getSwitchProps('matchRoomAutoConnectToServerDelayed')}
+        />
+        : null
+    }
     <ListItemSwitch
       primary="Veto Server Locations"
       secondary="Veto server locations automatically based on your location preferences with a delay of 2 seconds, so you can still veto manually and influence the outcome."

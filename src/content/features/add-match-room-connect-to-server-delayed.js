@@ -7,9 +7,12 @@ import storage from '../../libs/storage'
 const FEATURE_ATTRIBUTE = 'connect-to-server-delayed'
 
 export default async parentElement => {
-  const { matchRoomAutoConnectToServer } = await storage.getAll()
+  const {
+    matchRoomAutoConnectToServer,
+    matchRoomAutoConnectToServerDelayed
+  } = await storage.getAll()
 
-  if (matchRoomAutoConnectToServer) {
+  if (matchRoomAutoConnectToServer && !matchRoomAutoConnectToServerDelayed) {
     return
   }
 
@@ -89,4 +92,8 @@ export default async parentElement => {
   goToServerElement.parentElement.append(
     <div>{connectToServerDelayedElement}</div>
   )
+
+  if (matchRoomAutoConnectToServerDelayed) {
+    connectToServerDelayedElement.click()
+  }
 }
