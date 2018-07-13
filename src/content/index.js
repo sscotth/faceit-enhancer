@@ -51,9 +51,8 @@ function observeMainContent(element) {
         element
       )
 
-      storage.getAll().then((x) => {
-        const matchRoomAutoConnectToServerDelayed = x.matchRoomAutoConnectToServerDelayed
-        console.log(JSON.stringify(x))
+      storage.getAll().then(({ matchRoomAutoConnectToServerDelayed }) => {
+        console.log('matchRoomAutoConnectToServerDelayed', matchRoomAutoConnectToServerDelayed)
 
         if (matchRoomAutoConnectToServerDelayed) {
           runFeatureIf(
