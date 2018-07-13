@@ -50,7 +50,10 @@ function observeMainContent(element) {
         copyMatchRoomCopyServerData,
         element
       )
-      storage.getAll().then(({ matchRoomAutoConnectToServerDelayed }) => {
+      storage.getAll().then((x) => {
+        const { matchRoomAutoConnectToServerDelayed } = x
+        console.log(x)
+
         if (matchRoomAutoConnectToServerDelayed) {
           runFeatureIf(
             'matchRoomAutoConnectToServerDelayed',
