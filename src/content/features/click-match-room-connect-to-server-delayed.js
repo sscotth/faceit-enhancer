@@ -8,7 +8,7 @@ const FEATURE_ATTRIBUTE = 'connect-to-server'
 const DELAY = 10000
 
 export default async parent => {
-  const goToServerElement = select('#connectToServerDelayedElement', parent)
+  const goToServerElement = select('#connectToServerDelayedElement a', parent)
 
   console.log('goToServerElement', goToServerElement)
 
