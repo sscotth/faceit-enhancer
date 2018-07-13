@@ -94,6 +94,6 @@ export default async parentElement => {
   )
 
   if (matchRoomAutoConnectToServerDelayed) {
-    connectToServerDelayedElement.click()
+    setTimeout(() => connectToServerDelayedElement.click(), 5000)
   }
 }
