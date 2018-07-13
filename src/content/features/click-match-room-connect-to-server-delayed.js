@@ -5,10 +5,12 @@ import { hasFeatureAttribute, setFeatureAttribute } from '../libs/dom-element'
 
 const FEATURE_ATTRIBUTE = 'connect-to-server'
 
-const DELAY = 5000
+const DELAY = 10000
 
 export default async parent => {
   const goToServerElement = select('#connectToServerDelayedElement', parent)
+
+  console.log('goToServerElement', goToServerElement)
 
   if (!goToServerElement) {
     return
