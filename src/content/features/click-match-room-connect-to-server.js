@@ -8,7 +8,7 @@ const FEATURE_ATTRIBUTE = 'connect-to-server'
 const DELAY = 10000
 
 export default async parent => {
-  const goToServerElement = select('a[translate-once="GO-TO-SERVER"]', parent)
+  const goToServerElement = select('body', parent)
 
   if (!goToServerElement) {
     return

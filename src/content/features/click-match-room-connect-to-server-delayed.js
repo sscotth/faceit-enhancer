@@ -39,6 +39,6 @@ export default async parent => {
 
   notifyIf('notifyMatchRoomAutoConnectToServer', {
     title: 'Connecting to Server',
-    message: `Launching the game and connecting to the server in with one minute remaining.`
+    message: 'Launching the game and connecting to the server with one minute remaining.',
   })
 }
