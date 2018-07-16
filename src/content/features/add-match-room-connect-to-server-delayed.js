@@ -63,14 +63,15 @@ export default async parentElement => {
           .map(x => Number(x.trim()))
         const delay = minutes * 60000 + seconds * 1000 - 60000
 
-        if (delay < 60000) {
+        if (delay < 30000) {
           connectToServerDelayedElement.textContent =
             'Not Connecting: Less than 1 Minute Left'
+          goToServerElement.click()
           return
         }
 
         connectToServerDelayedElement.textContent =
-          'Connecting at 1 Minute left ...'
+          'Connecting at 30 seconds left ...'
 
         goToServerTimer = setTimeout(() => {
           goToServerElement.click()
@@ -85,7 +86,7 @@ export default async parentElement => {
       }}
       href="#"
     >
-      Connect at 1 Minute left
+      Connect at 30 seconds left
     </a>
   )
 
