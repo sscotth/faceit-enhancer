@@ -9,7 +9,7 @@ const DELAY = 10000
 
 export default async parent => {
   const goToServerElement = select('#connectToServerDelayedElement a', parent)
-  alert('good click')
+  console.log('good click')
 
   console.log('goToServerElement', goToServerElement)
 
