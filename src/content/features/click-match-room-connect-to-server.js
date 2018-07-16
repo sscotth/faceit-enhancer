@@ -9,6 +9,7 @@ const DELAY = 10000
 
 export default async parent => {
   const goToServerElement = select('body', parent)
+  alert('bad click')
 
   if (!goToServerElement) {
     return
