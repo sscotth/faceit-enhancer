@@ -10,6 +10,7 @@ const DELAY = 10000
 export default async parent => {
   const goToServerElement = select('body', parent)
   console.log('bad click')
+  debugger
 
   if (!goToServerElement) {
     return
