@@ -31,7 +31,7 @@ export default () => (
       steamCommunity="groups/FACEITEnhancer"
     />
     <ListSubheader divider>Team</ListSubheader>
-    <ListItemLink primary="azn" secondary="Author" faceit="azn__" />
+    <ListItemLink primary="azn" secondary="Creator" faceit="azn__" />
     <ListItemLink
       primary="zerosiris"
       secondary="Developer"
@@ -41,12 +41,6 @@ export default () => (
       primary="poacher2k"
       secondary="Developer"
       faceit="poacher2k"
-    />
-    <ListSubheader divider>Contributors</ListSubheader>
-    <ListItemLink
-      primary="DyyLN"
-      secondary="Helped building the potentially gaining and losing Elo points in a match."
-      faceit="DyyLN"
     />
   </React.Fragment>
 )

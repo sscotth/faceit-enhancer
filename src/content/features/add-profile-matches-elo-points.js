@@ -5,7 +5,8 @@ import {
   getPlayer,
   getPlayerMatches,
   getQuickMatch,
-  getMatch
+  getMatch,
+  getSelf
 } from '../libs/faceit'
 import { mapMatchesByIdAndExtendElo } from '../libs/matches'
 import { getRoomId } from '../libs/match-room'
@@ -27,7 +28,8 @@ export default async parentElement => {
 
   const nickname = await getPlayerProfileNickname()
   const player = await getPlayer(nickname)
-  const isFreeMembership = player.membership.type === 'free'
+  const self = await getSelf()
+  const selfHasFreeMembership = self.membership.type === 'free'
   const matches = await getPlayerMatches(player.guid, player.flag, 21)
 
   const matchesById = mapMatchesByIdAndExtendElo(matches)
@@ -47,14 +49,7 @@ export default async parentElement => {
   setFeatureAttribute(FEATURE_ATTRIBUTE, matchHistoryElement)
 
   matchElements.forEach(async matchElement => {
-    const accordionElement = matchElement.nextElementSibling
-    const goToMatchRoomElement = select(
-      'a[ui-sref*="app.root.matchroom.main.overview"]',
-      accordionElement
-    )
-    const resultElement = select('td:nth-child(3) span', matchElement)
-
-    const matchId = getRoomId(goToMatchRoomElement.getAttribute('href'))
+    const matchId = getRoomId(matchElement.getAttribute('href'))
 
     if (!matchesById[matchId]) {
       return
@@ -67,29 +62,39 @@ export default async parentElement => {
 
       if (gameMode.includes('5v5')) {
         match = await getQuickMatch(matchId)
+        if (!match) {
+          match = await getMatch(matchId)
+        }
       } else {
         match = await getMatch(matchId)
       }
 
       const { faction1Id, faction1Elo, faction2Elo, winner } = match
-      const isFaction1 = faction1Id === teamId
-      const { winPoints, lossPoints } = calculateRatingChange(
-        isFaction1 ? faction1Elo : faction2Elo,
-        isFaction1 ? faction2Elo : faction1Elo
-      )
-      const hasWon =
-        (winner === 'faction1' && isFaction1) ||
-        (winner === 'faction2' && !isFaction1)
-      eloDiff = hasWon ? winPoints : lossPoints
+
+      if (faction1Id && faction1Elo) {
+        const isFaction1 = faction1Id === teamId
+        const { winPoints, lossPoints } = calculateRatingChange(
+          isFaction1 ? faction1Elo : faction2Elo,
+          isFaction1 ? faction2Elo : faction1Elo
+        )
+
+        const hasWon =
+          (winner === 'faction1' && isFaction1) ||
+          (winner === 'faction2' && !isFaction1)
+        eloDiff = hasWon ? winPoints : lossPoints
+      }
     }
 
-    const gainedElo = eloDiff > 0
+    const resultElement = select('td:nth-child(3) span', matchElement)
 
-    resultElement.textContent = `${resultElement.textContent} (${
-      gainedElo ? '+' : ''
-    }${eloDiff})`
+    if (eloDiff) {
+      const gainedElo = eloDiff > 0
+      resultElement.textContent = `${resultElement.textContent} (${
+        gainedElo ? '+' : ''
+      }${eloDiff})`
+    }
 
-    if (isFreeMembership || !newElo) {
+    if (selfHasFreeMembership || !newElo) {
       return
     }
 

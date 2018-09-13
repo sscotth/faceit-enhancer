@@ -7,7 +7,7 @@ import { matchRoomIsReady } from './libs/match-room'
 import clickModalPartyInviteAccept from './features/click-modal-party-invite-accept'
 import clickModalMatchQueuingContinue from './features/click-modal-match-queuing-continue'
 import clickModalMatchReady from './features/click-modal-match-ready'
-import addMatchRoomDeveloperLabels from './features/add-match-room-developer-labels'
+import addMatchRoomFeaturedPlayerLabels from './features/add-match-room-featured-player-labels'
 import addMatchRoomPlayerColors from './features/add-match-room-player-colors'
 import addMatchRoomPlayerFlags from './features/add-match-room-player-flags'
 import addMatchRoomPlayerElos from './features/add-match-room-player-elos'
@@ -17,7 +17,6 @@ import copyMatchRoomCopyServerData from './features/copy-match-room-copy-server-
 import clickMatchRoomConnectToServer from './features/click-match-room-connect-to-server'
 import clickMatchRoomConnectToServerDelayed from './features/click-match-room-connect-to-server-delayed'
 import addHeaderLevelProgress from './features/add-header-level-progress'
-import moveHeaderSearch from './features/move-header-search'
 import hideMatchRoomPlayerControls from './features/hide-match-room-player-controls'
 import addSidebarMatchesEloPoints from './features/add-sidebar-matches-elo-points'
 import addProfileMatchesEloPoints from './features/add-profile-matches-elo-points'
@@ -39,7 +38,7 @@ import showSidebarHubQueuing from './features/show-sidebar-hub-queuing'
 function observeMainContent(element) {
   const runFeatures = () => {
     if (pages.isRoomOverview() && matchRoomIsReady()) {
-      addMatchRoomDeveloperLabels(element)
+      addMatchRoomFeaturedPlayerLabels(element)
       addMatchRoomPlayerColors(element)
       addMatchRoomPlayerFlags(element)
       addMatchRoomPlayerElos(element)
@@ -140,7 +139,6 @@ function observeBody() {
       }
     }
 
-    moveHeaderSearch()
     runFeatureIf('headerShowElo', addHeaderLevelProgress)
 
     addSidebarMatchesEloPoints()
